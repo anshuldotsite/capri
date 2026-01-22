@@ -67,11 +67,13 @@ export function Menu() {
   );
 }
 
+type PizzaSize = 'baby' | 'small' | 'medium' | 'large' | 'queen' | 'king';
+
 function MenuCard({ item }: { item: MenuItem }) {
   // Default to Large (Medium index logic or specific key)
-  const [size, setSize] = useState<'baby' | 'small' | 'medium' | 'large' | 'queen' | 'king'>('large');
+  const [size, setSize] = useState<PizzaSize>('large');
 
-  const sizeLabels: Record<string, string> = {
+  const sizeLabels: Record<PizzaSize, string> = {
     baby: 'Baby (6pcs)',
     small: 'Small (8pcs)',
     medium: 'Medium (12pcs)',
@@ -125,7 +127,7 @@ function MenuCard({ item }: { item: MenuItem }) {
           <div className="mb-6">
             <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 block">Select Size</label>
             <div className="grid grid-cols-3 gap-2">
-              {(Object.keys(sizeLabels) as Array<keyof typeof sizeLabels>).map((s) => (
+              {(Object.keys(sizeLabels) as PizzaSize[]).map((s) => (
                 <button
                   key={s}
                   onClick={() => setSize(s)}
